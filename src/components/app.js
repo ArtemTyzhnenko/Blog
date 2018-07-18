@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import BlogListContainer from '../containers/BlogListContainer/BlogListContainer';
 import NewPostContainer from '../containers/NewPostContainer/NewPostContainer';
 
+import './App.css'
+
 export default class App extends Component {
     render() {
         return (
