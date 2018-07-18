@@ -1,10 +1,18 @@
 import React, {Component} from 'react';
-import BlogContainer from '../containers/BlogContainer/BlogContainer';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import BlogListContainer from '../containers/BlogListContainer/BlogListContainer';
+import NewPostContainer from '../containers/NewPostContainer/NewPostContainer';
 
 export default class App extends Component {
     render() {
         return (
-            <BlogContainer />
+            <BrowserRouter>
+                <Switch>
+                    <Route path="/posts/new" component={NewPostContainer}/>
+                    <Route path="/" component={BlogListContainer}/>
+                </Switch>
+            </BrowserRouter>
+
         );
     }
 }

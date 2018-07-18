@@ -1,12 +1,12 @@
 import * as actionTypes from './actionTypes';
 
 let initialState = {
-    blog: {},
+    posts: {},
     isFetching: false,
     didInvalidate: false,
 };
 
-const blog = (state = initialState, action) => {
+const posts = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.FETCH_POSTS:
             return {
@@ -16,7 +16,7 @@ const blog = (state = initialState, action) => {
         case actionTypes.RECEIVE_POSTS_SUCCESS:
             return {
                 ...state,
-                blog:{
+                posts:{
                     ...action.data,
                 },
                 isFetching: false,
@@ -24,7 +24,7 @@ const blog = (state = initialState, action) => {
         case actionTypes.RECEIVE_POSTS_FAIL:
             return {
                 ...state,
-                blog: {},
+                posts: {},
                 isFetching: false,
                 didInvalidate: true,
             };
@@ -33,4 +33,4 @@ const blog = (state = initialState, action) => {
     }
 };
 
-export default blog;
+export default posts;
