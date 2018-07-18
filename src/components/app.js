@@ -8,7 +8,7 @@ export default class App extends Component {
         return (
             <BrowserRouter>
                 <Switch>
-                    <Route path="/posts/new" component={NewPostContainer}/>
+                    <Route path="/post/new" component={NewPostContainer}/>
                     <Route path="/" component={BlogListContainer}/>
                 </Switch>
             </BrowserRouter>
