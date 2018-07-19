@@ -8,7 +8,7 @@ let initialState = {
 
 const posts = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.FETCH_POSTS:
+        case actionTypes.FETCH_POSTS || actionTypes.SEND_POSTS:
             return {
                 ...state,
                 isFetching: true,
@@ -21,13 +21,17 @@ const posts = (state = initialState, action) => {
                 },
                 isFetching: false,
             };
-        case actionTypes.RECEIVE_POSTS_FAIL:
+        case actionTypes.RECEIVE_POSTS_FAIL || actionTypes.SEND_POSTS_FAIL:
             return {
                 ...state,
-                posts: {},
                 isFetching: false,
                 didInvalidate: true,
             };
+
+        case actionTypes.SEND_POSTS_SUCCESS:
+            return{
+
+            }
         default:
             return state;
     }

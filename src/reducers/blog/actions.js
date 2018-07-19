@@ -18,8 +18,20 @@ const receivePostsFail = () => ({
     type: actionType.RECEIVE_POSTS_FAIL
 });
 
+const sendPosts = () => ({
+    type: actionType.SEND_POSTS,
+});
 
-export const getPosts = () =>{
+const sendPostsSuccess = (data) => ({
+    type: actionType.SEND_POSTS_SUCCESS,
+    data,
+});
+
+const sendPostsFail = () => ({
+    type: actionType.SEND_POSTS_FAIL
+});
+
+export const getPosts = () => {
     return dispatch => {
         dispatch(fetchPosts());
         return axios.get(`${ROOT_URL}/posts${API_KEY}`)
@@ -30,3 +42,15 @@ export const getPosts = () =>{
             .catch(error => dispatch(receivePostsFail(error)))
     }
 };
+
+export const createPost = (values) => {
+    return dispatch => {
+        dispatch(sendPosts());
+        return axios.post(`${ROOT_URL}/posts${API_KEY}`, values)
+            .then(response => alert(response))
+            .catch(error => dispatch(sendPostsFail(error)))
+    }
+};
+
+
+
