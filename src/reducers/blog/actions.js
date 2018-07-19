@@ -18,17 +18,30 @@ const receivePostsFail = () => ({
     type: actionType.RECEIVE_POSTS_FAIL
 });
 
-const sendPosts = () => ({
-    type: actionType.SEND_POSTS,
+const sendPost = () => ({
+    type: actionType.SEND_POST,
 });
 
-const sendPostsSuccess = (data) => ({
-    type: actionType.SEND_POSTS_SUCCESS,
+const sendPostSuccess = () => ({
+    type: actionType.SEND_POST_SUCCESS,
+});
+
+const sendPostFail = () => ({
+    type: actionType.SEND_POST_FAIL
+});
+
+const fetchCurrentPost = () => ({
+    type: actionType.FETCH_CURRENT_POST,
+});
+
+const receiveCurrentPostSuccess = (id, data) => ({
+    type: actionType.RECEIVE_CURRENT_POST_SUCCESS,
+    id,
     data,
 });
 
-const sendPostsFail = () => ({
-    type: actionType.SEND_POSTS_FAIL
+const receiveCurrentPostFail = () => ({
+    type: actionType.RECEIVE_CURRENT_POST_FAIL
 });
 
 export const getPosts = () => {
@@ -43,12 +56,22 @@ export const getPosts = () => {
     }
 };
 
-export const createPost = (values) => {
+export const createPost = (values, callback) => {
     return dispatch => {
-        dispatch(sendPosts());
+        dispatch(sendPost());
         return axios.post(`${ROOT_URL}/posts${API_KEY}`, values)
-            .then(response => alert(response))
-            .catch(error => dispatch(sendPostsFail(error)))
+            .then(() => dispatch(sendPostSuccess()))
+            .then(() => callback())
+            .catch(error => dispatch(sendPostFail(error)))
+    }
+};
+
+export const getCurrentPost = (id) => {
+    return dispatch => {
+        dispatch(fetchCurrentPost());
+        return axios.get(`${ROOT_URL}/posts/${id}${API_KEY}`)
+            .then(response => dispatch(receiveCurrentPostSuccess(id, response.data)))
+            .catch(error => dispatch(receiveCurrentPostFail(error)))
     }
 };
 
