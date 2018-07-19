@@ -49,7 +49,7 @@ class NewPost extends Component {
                     component={this.renderField}
                 />
                 <button type="submit" className="btn btn-primary">Add New Post</button>
-                <Link to="/" className="btn btn-danger">Cancel</Link>
+                <Link to="/" className="btn btn-danger btn-cancel">Cancel</Link>
             </form>
         )
     }
@@ -59,13 +59,13 @@ const validate = (values) => {
     const errors = {};
 
     if(!values.title){
-        errors.title = 'Enter a title'
+        errors.title = 'Enter a title';
     }
     if(!values.categories){
-        errors.categories = 'Enter some categories'
+        errors.categories = 'Enter some categories';
     }
     if(!values.content){
-        errors.content = 'Enter some categories'
+        errors.content = 'Enter some categories';
     }
 
     return errors;

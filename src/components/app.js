@@ -4,7 +4,7 @@ import BlogListContainer from '../containers/BlogListContainer/BlogListContainer
 import NewPostContainer from '../containers/NewPostContainer/NewPostContainer';
 import PostShowContainer from '../containers/PostShowContainer/PostShowContainer'
 
-import './App.css'
+import './App.scss'
 
 export default class App extends Component {
     render() {
@@ -16,7 +16,6 @@ export default class App extends Component {
                     <Route path="/" component={ BlogListContainer } />
                 </Switch>
             </BrowserRouter>
-
         );
     }
 }

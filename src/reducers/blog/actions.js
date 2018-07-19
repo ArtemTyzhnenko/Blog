@@ -15,7 +15,7 @@ const receivePostsSuccess = (data) => ({
 });
 
 const receivePostsFail = () => ({
-    type: actionType.RECEIVE_POSTS_FAIL
+    type: actionType.RECEIVE_POSTS_FAIL,
 });
 
 const sendPost = () => ({
@@ -27,7 +27,7 @@ const sendPostSuccess = () => ({
 });
 
 const sendPostFail = () => ({
-    type: actionType.SEND_POST_FAIL
+    type: actionType.SEND_POST_FAIL,
 });
 
 const fetchCurrentPost = () => ({
@@ -41,7 +41,20 @@ const receiveCurrentPostSuccess = (id, data) => ({
 });
 
 const receiveCurrentPostFail = () => ({
-    type: actionType.RECEIVE_CURRENT_POST_FAIL
+    type: actionType.RECEIVE_CURRENT_POST_FAIL,
+});
+
+const deletePost = () => ({
+   type: actionType.DELETE_POST,
+});
+
+const deletePostSuccess = (newPosts) => ({
+    type: actionType.DELETE_POST_SUCCESS,
+    newPosts,
+});
+
+const deletePostFail = () => ({
+    type: actionType.DELETE_POST_FAIL,
 });
 
 export const getPosts = () => {
@@ -75,5 +88,18 @@ export const getCurrentPost = (id) => {
     }
 };
 
+export const deleteCurrentPost = (id, callback) => {
+    return (dispatch, getState) => {
+        dispatch(deletePost());
+        const {posts} = getState();
+        return axios.delete(`${ROOT_URL}/posts/${id}${API_KEY}`)
+            .then(() => {
+                const newPosts = _.omit(posts.posts, id);
+                dispatch(deletePostSuccess(newPosts));
+            })
+            .then(() => callback())
+            .catch(error => dispatch(deletePostFail(error)))
+    }
+};
 
 
